@@ -1,0 +1,336 @@
+body {
+    font-family: 'Roboto', sans-serif;
+    font-weight: 400;
+    /* Regular */
+}
+
+h1 {
+    font-family: 'Roboto', sans-serif;
+    font-weight: 700;
+    /* Bold */
+}
+
+p {
+    font-family: 'Roboto', sans-serif;
+    font-weight: 500;
+    /* Medium */
+}
+
+
+/* header */
+.header .container.d-flex {
+    flex-wrap: nowrap;
+    /* Giữ các phần tử trên một hàng */
+}
+
+.header .box1 {
+    max-width: 400px;
+    flex-grow: 1;
+    /* Cho phép ô tìm kiếm giãn đều */
+}
+
+.header .collapse.navbar-collapse {
+    flex-grow: 2;
+    /* Để đảm bảo menu chiếm phần lớn không gian còn lại */
+}
+
+
+
+.header .search-box1 input {
+    width: 100%;
+    /* Đảm bảo ô tìm kiếm chiếm toàn bộ chiều rộng */
+}
+
+.header .nav-link:hover {
+    color: #198754 !important;
+    /* Bootstrap success color */
+}
+
+
+
+.header .box1 {
+    max-width: 600px;
+    width: 100%;
+}
+
+.header .box1 .search-box1 {
+    position: relative;
+    height: 40px;
+    max-width: 380px;
+    margin: auto;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.25);
+    border-radius: 25px;
+}
+
+.header .search-box1 input {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    border-radius: 25px;
+    background-color: #fff;
+    outline: none;
+    border: none;
+    padding-left: 18px;
+}
+
+.header .search-box1 .icon1 {
+    position: absolute;
+    right: -2px;
+    top: 0;
+    width: 40px;
+    background-color: #198754;
+    height: 100%;
+    text-align: center;
+    line-height: 40px;
+    border-radius: 0 25px 25px 0;
+}
+
+@media (max-width: 1400px) {
+    .header .box1 {
+        max-width: 500px;
+    }
+}
+
+@media (max-width: 1200px) {
+    .header .box1 {
+        max-width: 300px;
+    }
+}
+
+@media (max-width: 992px) {
+    .header .box1 {
+        max-width: 300px;
+    }
+
+    .header .box1 .search-box1 {
+        max-width: 260px;
+    }
+}
+
+@media (max-width: 768px) {}
+
+@media (max-width: 576px) {
+    .header .box1 {
+        max-width: 200px;
+    }
+
+    .header .box1 .search-box1 {
+        max-width: 180px;
+    }
+}
+/* end header */
+
+/* home */
+.home-content .submenu .nav-link:hover {
+    color: #198754;
+    background-color: #e9ecef;
+}
+
+.home-content .submenu {
+    background-color: #f8f9fa;
+}
+
+.home-content .submenu .nav-link {
+    color: #333;
+    font-weight: bold;
+    padding: 10px 15px;
+    display: flex;
+    align-items: center;
+    font-size: 16px;
+    border-radius: 5px;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.home-content .submenu .nav-link:hover {
+    color: #198754;
+    background-color: #e9ecef;
+}
+
+.home-content .carousel-inner .carousel-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center center;
+}
+
+.home-content .bdge {
+    border-radius: 5px;
+    padding: 30px 50px;
+}
+
+/* Responsive - Ẩn submenu và hình ảnh quảng cáo khi màn hình nhỏ hơn hoặc bằng 768px */
+@media (max-width: 1199px) {
+
+    .home-content .submenu,
+    .home-content .row .col-xl-3 img.img-fluid {
+        display: none;
+    }
+}
+
+
+@media (max-width: 1400px) {}
+
+@media (max-width: 1200px) {}
+
+@media (max-width: 992px) {}
+
+@media (max-width: 768px) {}
+
+@media (max-width: 576px) {}
+/* end home */
+
+/* login */
+.login-content {  
+    width: 100%;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.5);
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 9999 !important;
+    display: none;
+}
+
+.login-content.active {
+    display: block;
+}
+
+.login-content .close-btn {
+    position: absolute;
+    top: -10px;
+    right: 15px;
+    font-size: 50px;
+    color: rgb(0, 0, 0);
+    cursor: pointer;
+}
+
+
+.login-content .wrapper {
+    width: 420px;
+    color: #000000;
+    background: white;
+    border: 2px solid rgba(255, 255, 255, .2);
+    box-shadow: 10px 10px 24px rgb(0, 0, 0, 0.1);
+    border-radius: 10px;
+    padding: 30px 40px;
+
+    position: relative;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+
+.login-content .wrapper h1 {
+    color: #198754;
+    font-size: 36px;
+    text-align: center;
+}
+
+
+.login-content .wrapper .input-box {
+    width: 100%;
+    height: 50px;
+    margin: 30px 0;
+    position: relative;
+    margin-bottom: 50px;
+}
+
+
+.login-content .input-box input {
+    width: 100%;
+    height: 100%;
+    background: transparent;
+    border: none;
+    border: 2px solid rgba(255, 255, 255, .2);
+    border-radius: 999px;
+    font-size: 16px;
+    color: #000000;
+    padding: 20px 45px 20px 20px;
+    outline: 2px solid #000000;
+}
+
+
+.login-content .input-box input::placeholder {
+    color: #000000;
+    
+}
+
+.login-content .input-box input:focus {
+    outline: 2px solid #198754;
+}
+
+
+.login-content .input-box i {
+    position: absolute;
+    right: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 20px;
+}
+
+
+.login-content .wrapper .remember-forgot {
+    display: flex;
+    justify-content: space-between;
+    font-size: 14.5px;
+    margin: -15px 0 15px;
+}
+
+
+.login-content .remember-forgot label input {
+    accent-color: #198754;
+    margin-right: 3px;
+}
+
+
+.login-content .remember-forgot a {
+    color: #000000;
+    text-decoration: none;
+}
+
+
+.login-content .remember-forgot a:hover {
+    text-decoration: underline;
+}
+
+
+.login-content .wrapper .login-btn {
+    width: 100%;
+    height: 45px;
+    background: #009970;
+    border: none;
+    outline: none;
+    border-radius: 40px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, .1);
+    cursor: pointer;
+    color: #fff;
+    font-weight: 600;
+}
+
+
+.login-content .wrapper .register-link {
+    font-size: 14.5px;
+    text-align: center;
+    margin: 20px 0 15px;
+}
+
+
+.login-content .register-link p a {
+    color: #198754;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+
+.login-content .register-link p a:hover {
+    text-decoration: underline;
+}
+
+
+.login-content small {
+    padding: 10px 10px 10px 10px;
+    color: red;
+    font-size: smaller;
+}
+/* end login */
