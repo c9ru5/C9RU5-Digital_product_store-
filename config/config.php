@@ -6,12 +6,17 @@ define('DB_PASS', '');
 
 $link = str_replace('\\', '/', dirname(__DIR__));
 define('_DIR_ROOT', $link);
-//Xử lý http root
-if (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] == 'on') {
-    $web_root = 'https://' . $_SERVER['HTTP_HOST'];
-} else {
-    $web_root = 'http://' . $_SERVER['HTTP_HOST'];
-}
-$folder = str_replace(strtolower($_SERVER['DOCUMENT_ROOT']), '', strtolower(_DIR_ROOT));
-$web_root .= $folder;
-define('_WEB_ROOT', $web_root);
+
+// Xử lý http root
+$protocol = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] == 'on') ? 'https://' : 'http://';
+$web_root = $protocol . $_SERVER['HTTP_HOST'];
+
+// Xác định thư mục gốc dự án
+$documentRoot = str_replace('\\', '/', realpath($_SERVER['DOCUMENT_ROOT']));
+$projectRoot = str_replace($documentRoot, '', _DIR_ROOT);
+
+// Đảm bảo dấu "/" đúng
+$web_root .= '/' . trim($projectRoot, '/');
+
+define('_WEB_ROOT', rtrim($web_root, '/'));
+
