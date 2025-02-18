@@ -52,7 +52,12 @@ class Cart extends Controller
             $this->cart_model->setDetailQuantity(1);
             $this->cart_model->insertCart($this->cart_model);
 
-            echo json_encode(["success" => true, "message" => "Thêm vào giỏ hàng thành công!"]);
+            echo json_encode(["success" => true]);
+            $_SESSION['noti'] = [
+                'title' => 'Thành công',
+                'mess'  => 'Thêm vào giỏ hàng thành công',
+                'type'  => 'success'
+            ];
         } catch (Exception $e) {
             echo json_encode(["success" => false, "message" => "Lỗi: " . $e->getMessage()]);
         }

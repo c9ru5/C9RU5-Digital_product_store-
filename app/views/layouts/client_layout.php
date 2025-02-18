@@ -13,11 +13,17 @@
 </head>
 
 <body>
+    <div id="noti"></div>
+
     <?php
+    include_once 'app/notification/notification.php';
     $this->render('blocks/client_header');
     $this->render($content, $sub_content);
     $this->render('blocks/client_footer');
     ?>
+    
+    
+    <script src="<?= _WEB_ROOT ?>/app/notification/notification.js"></script>
 </body>
 
 </html>

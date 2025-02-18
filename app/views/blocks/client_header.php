@@ -63,9 +63,9 @@
 
                         <?php if (isset($_SESSION['user'])): ?>
                             <li class="nav-item">
-                            <a class="nav-link" href="<?= _WEB_ROOT ?>/dang-xuat"><i
-                                    style="font-size: 25px;"
-                                    class="bi bi-person-circle"></i></a>
+                                <a class="nav-link" href="<?= _WEB_ROOT ?>/dang-xuat"><i
+                                        style="font-size: 25px;"
+                                        class="bi bi-person-circle"></i></a>
                             </li>
                         <?php else: ?>
                             <button id="open-login-modal" type="button" class="btn btn-success">Đăng nhập</button>
@@ -211,9 +211,13 @@
                 .then(data => {
                     if (data.success) {
                         window.location.reload(); // Đăng nhập thành công => Load lại trang
-                        alert(data.message);
                     } else {
-                        alert(data.message); // Hiển thị lỗi
+                        console.log("Đăng nhập thất bại!");
+                        notification({
+                            title: "Thất bại",
+                            mess: "Sai email hoặc mật khẩu",
+                            type: "error"
+                        });
                     }
                 })
                 .catch(error => console.error("Lỗi:", error));

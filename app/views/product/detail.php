@@ -147,7 +147,7 @@
                     })
                     .then(response => response.json())
                     .then(data => {
-                        alert(data.message);
+                        
                         if (data.success) {
                             window.location.reload();
                         }
