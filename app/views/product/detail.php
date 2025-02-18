@@ -21,22 +21,22 @@
                 <?php if ($product['quantity']): ?>
                     <?php if (isset($_SESSION['user'])): ?>
                         <div class="d-flex mt-3">
-                        <button type="button" class="btn btn-success mx-2" style="width: 30%;"><i
-                                class="bi bi-credit-card-fill"></i> Mua ngay</button>
-                        <button type="button" class="btn text-success mx-2" id="btn-add-cart"
-                            style="border: solid 1px #198754; width: 30%;"><i class="bi bi-cart-plus"></i> Thêm vào
-                            giỏ</button>
-                    </div>
-                        <?php else: ?>
-                            <div class="d-flex mt-3">
-                        <button type="button" class="btn btn-success mx-2" style="width: 30%;" onclick="return checkLogin()"><i
-                                class="bi bi-credit-card-fill"></i> Mua ngay</button>
-                        <button type="button" class="btn text-success mx-2" onclick="return checkLogin()"
-                            style="border: solid 1px #198754; width: 30%;"><i class="bi bi-cart-plus"></i> Thêm vào
-                            giỏ</button>
-                    </div>
-                        <?php endif; ?>
-                    
+                            <button type="button" class="btn btn-success mx-2" style="width: 30%;"><i
+                                    class="bi bi-credit-card-fill"></i> Mua ngay</button>
+                            <button type="button" class="btn text-success mx-2" id="btn-add-cart"
+                                style="border: solid 1px #198754; width: 30%;"><i class="bi bi-cart-plus"></i> Thêm vào
+                                giỏ</button>
+                        </div>
+                    <?php else: ?>
+                        <div class="d-flex mt-3">
+                            <button type="button" class="btn btn-success mx-2" style="width: 30%;" onclick="return checkLogin()"><i
+                                    class="bi bi-credit-card-fill"></i> Mua ngay</button>
+                            <button type="button" class="btn text-success mx-2" onclick="return checkLogin()"
+                                style="border: solid 1px #198754; width: 30%;"><i class="bi bi-cart-plus"></i> Thêm vào
+                                giỏ</button>
+                        </div>
+                    <?php endif; ?>
+
                 <?php else: ?>
                     <div class="d-flex mt-3">
                         <button type="button" class="btn btn-success mx-2" style="width: 30%;" disabled><i
@@ -128,7 +128,11 @@
 
 <script>
     function checkLogin() {
-        alert("Vui lòng đăng nhập!");
+        notification({
+            title: "Chú ý",
+            mess: "Vui lòng đăng nhập",
+            type: "warning",
+        });
         return false; // Ngăn không cho chuyển trang
     }
     document.addEventListener("DOMContentLoaded", function() {
@@ -147,7 +151,6 @@
                     })
                     .then(response => response.json())
                     .then(data => {
-                        
                         if (data.success) {
                             window.location.reload();
                         }
