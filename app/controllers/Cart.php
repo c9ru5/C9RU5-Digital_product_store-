@@ -30,19 +30,19 @@ class Cart extends Controller
         header('Content-Type: application/json');
 
         if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
-            echo json_encode(["success" => false, "message" => "Phương thức không hợp lệ!"]);
+            echo json_encode(["result" => false, "message" => "Phương thức không hợp lệ!"]);
             return;
         }
 
         if (!isset($_SESSION['user']['id'])) {
-            echo json_encode(["success" => false, "message" => "Bạn chưa đăng nhập!"]);
+            echo json_encode(["result" => false, "message" => "Bạn chưa đăng nhập!"]);
             return;
         }
 
         // Lấy dữ liệu JSON từ request body
         $data = json_decode(file_get_contents("php://input"), true);
         if (!isset($data['product_id'])) {
-            echo json_encode(["success" => false, "message" => "Thiếu thông tin sản phẩm!"]);
+            echo json_encode(["result" => false, "message" => "Thiếu thông tin sản phẩm!"]);
             return;
         }
 
@@ -52,14 +52,9 @@ class Cart extends Controller
             $this->cart_model->setDetailQuantity(1);
             $this->cart_model->insertCart($this->cart_model);
 
-            echo json_encode(["success" => true]);
-            $_SESSION['noti'] = [
-                'title' => 'Thành công',
-                'mess'  => 'Thêm vào giỏ hàng thành công',
-                'type'  => 'success'
-            ];
+            echo json_encode(["result" => true, "title" => "Thành công", "mess" => "Thêm vào giỏ hàng thành công", "type" => "success"]);
         } catch (Exception $e) {
-            echo json_encode(["success" => false, "message" => "Lỗi: " . $e->getMessage()]);
+            echo json_encode(["result" => false, "message" => "Lỗi: " . $e->getMessage()]);
         }
     }
 

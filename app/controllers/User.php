@@ -27,9 +27,9 @@ class User extends Controller
                 'mess'  => 'Đăng nhập thành công',
                 'type'  => 'success'
             ];
-            echo json_encode(["success" => true]);
+            echo json_encode(["result" => true]);
         } else {
-            echo json_encode(["success" => false]);
+            echo json_encode(["result" => false, "title" => "Thất bại", "mess" => "Email hoặc mật khẩu không đúng", "type" => "error"]);
         }
         exit();
     }
@@ -47,11 +47,15 @@ class User extends Controller
     {
         $this->user_model->setEmail($_POST['email-rg']);
         $this->user_model->setPassword($_POST['password-rg']);
-        if ($_POST['password-rg'] == $_POST['confirm-rg']) {
-            $this->user_model->register($this->user_model);
-            echo json_encode(["success" => true, "message" => "Đăng ký thành công"]);
+        if ($this->user_model->checkEmail($this->user_model)) {
+            echo json_encode(["result" => false, "title" => "Thất bại", "mess" => "Email đã tồn tại", "type" => "error"]);
+        } elseif($this->user_model->checkPassword($this->user_model) == false) {
+            echo json_encode(["result" => false, "title" => "Thất bại", "mess" => "Mật khẩu phải có ít nhất 6 ký tự và chứa ít nhất một chữ hoa, chữ thường, số và ký tự đặc biệt", "type" => "error"]);
+        } elseif ($_POST['password-rg'] != $_POST['confirm-rg']) {
+            echo json_encode(["result" => false, "title" => "Thất bại", "mess" => "Mật khẩu không khớp", "type" => "error"]);
         } else {
-            echo json_encode(["success" => false, "message" => "Sai email hoặc mật khẩu"]);
+            $this->user_model->register($this->user_model);
+            echo json_encode(["result" => true, "title" => "Thành công", "mess" => "Đăng ký thành công", "type" => "success"]);
         }
     }
 

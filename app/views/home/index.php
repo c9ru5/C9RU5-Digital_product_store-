@@ -101,11 +101,11 @@
             <p>Danh sách những sản phẩm theo xu hướng mà có thể bạn sẽ thích</p>
           </div>
           <div>
-            <button type="button" class="btn btn-success">Xem thêm</button>
+          <a href="<?= _WEB_ROOT ?>/cua-hang" class="btn btn-success">Xem thêm</a>
           </div>
         </div>
         <div class="row row-cols-1 row-cols-sm-2 row-cols-lg-3 row-cols-xl-4">
-          <?php foreach ($product_list as $product) : ?>
+          <?php foreach ($new_products as $product) : ?>
           <div class="col mt-3 ">
             <a class="text-decoration-none text-dark d-flex"
               href="<?= _WEB_ROOT ?>/chi-tiet-san-pham/ma-san-pham-<?= $product['id'] ?>">
@@ -173,12 +173,12 @@
               <!-- <p>Danh sách những sản phẩm theo xu hướng mà có thể bạn sẽ thích</p> -->
             </div>
             <div>
-              <button type="button" class="btn btn-success">Xem thêm</button>
+            <a href="<?= _WEB_ROOT ?>/cua-hang" class="btn btn-success">Xem thêm</a>
             </div>
           </div>
 
           <div class="row row-cols-1 row-cols-sm-2 row-cols-lg-3 row-cols-xl-4">
-            <?php foreach ($product_list as $product) : ?>
+            <?php foreach ($hot_products as $product) : ?>
             <div class="col mt-3">
               <a class="text-decoration-none text-dark d-flex" href="<?= _WEB_ROOT ?>/chi-tiet-san-pham/ma-san-pham-<?= $product['id'] ?>">
                 <div
@@ -212,11 +212,11 @@
               chờ bạn</p>
           </div>
           <div>
-            <button type="button" class="btn btn-success">Xem thêm</button>
+            <a href="<?= _WEB_ROOT ?>/cua-hang/4" class="btn btn-success">Xem thêm</a>
           </div>
         </div>
         <div class="row row-cols-1 row-cols-sm-2 row-cols-lg-3 row-cols-xl-4">
-        <?php foreach ($product_list as $product) : ?>
+        <?php foreach ($steam_games as $product) : ?>
           <div class="col mt-3 ">
             <a class="text-decoration-none text-dark d-flex"
               href="<?= _WEB_ROOT ?>/chi-tiet-san-pham/ma-san-pham-<?= $product['id'] ?>">

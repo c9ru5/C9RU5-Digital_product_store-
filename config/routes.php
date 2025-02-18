@@ -10,3 +10,5 @@ $routes['dang-ky'] = 'user/register';
 $routes['dang-xuat'] = 'user/logout';
 $routes['gio-hang'] = 'cart/index';
 $routes['thong-tin-ca-nhan'] = 'user/profile';
+$routes['cua-hang'] = 'product/index';
+$routes['cua-hang/(\d+)'] = 'product/productByCategory/$1';

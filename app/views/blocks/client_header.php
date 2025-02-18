@@ -37,7 +37,7 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" style="font-weight: bolder;" href="#">Cửa
+                            <a class="nav-link" style="font-weight: bolder;" href="<?= _WEB_ROOT ?>/cua-hang">Cửa
                                 hàng
                             </a>
                         </li>
@@ -209,14 +209,14 @@
                 })
                 .then(response => response.json())
                 .then(data => {
-                    if (data.success) {
+                    if (data.result == true) {
                         window.location.reload(); // Đăng nhập thành công => Load lại trang
                     } else {
                         console.log("Đăng nhập thất bại!");
                         notification({
-                            title: "Thất bại",
-                            mess: "Sai email hoặc mật khẩu",
-                            type: "error"
+                            title: data.title,
+                            mess: data.mess,
+                            type: data.type
                         });
                     }
                 })
@@ -235,13 +235,20 @@
                 })
                 .then(response => response.json())
                 .then(data => {
-                    if (data.success) {
-                        alert(data.message);
-                        // Chuyển từ modal đăng ký sang modal đăng nhập
+                    if (data.result == true) {
                         registerModal.classList.remove("active");
                         loginModal.classList.add("active");
+                        notification({
+                            title: data.title,
+                            mess: data.mess,
+                            type: data.type
+                        });
                     } else {
-                        alert(data.message); // Hiển thị lỗi
+                        notification({
+                            title: data.title,
+                            mess: data.mess,
+                            type: data.type
+                        });
                     }
                 })
                 .catch(error => console.error("Lỗi:", error));

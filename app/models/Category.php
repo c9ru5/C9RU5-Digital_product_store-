@@ -44,4 +44,9 @@ class Category
         $sql = "SELECT * FROM categories";
         return $this->db->getAll($sql);
     }
+    public function getOneCategory(Category $category)
+    {
+        $sql = "SELECT * FROM categories WHERE id = ?";
+        return $this->db->getOne($sql, $category->getId());
+    }
 }

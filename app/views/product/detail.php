@@ -151,8 +151,14 @@
                     })
                     .then(response => response.json())
                     .then(data => {
-                        if (data.success) {
-                            window.location.reload();
+                        if (data.result == true) {
+                            notification({
+                                title: data.title,
+                                mess: data.mess,
+                                type: data.type,
+                            });
+                        } else {
+                            console.log(data.message);
                         }
                     })
                     .catch(error => console.error("Lỗi:", error));

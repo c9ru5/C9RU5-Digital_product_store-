@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Models;
 
 use App\Core\Model;
@@ -107,6 +108,43 @@ class Product
         $sql = "SELECT * FROM products";
         return $this->db->getAll($sql);
     }
+    public function getProductByCategory(Product $product, $limit, $offset)
+    {
+        $sql = "SELECT * FROM products WHERE category_id = ? LIMIT $limit OFFSET $offset";
+        return $this->db->getAll($sql, $product->getCategoryId());
+    }
+    public function getTotalProductsByCategory(Product $product)
+    {
+        $sql = "SELECT COUNT(*) as total FROM products WHERE category_id = ?";
+        $result = $this->db->getOne($sql, $product->getCategoryId());
+        return $result['total'] ?? 0;
+    }
+    public function paginationProduct($limit, $offset)
+    {
+        $sql = "SELECT * FROM products LIMIT $limit OFFSET $offset";
+        return $this->db->getAll($sql);
+    }
+    public function getHotProduct()
+    {
+        $sql = "SELECT * FROM products ORDER BY sales DESC";
+        return $this->db->getAll($sql);
+    }
+    public function getNewProduct()
+    {
+        $sql = "SELECT * FROM products ORDER BY id DESC";
+        return $this->db->getAll($sql);
+    }
+    public function getSteamGame()
+    {
+        $sql = "SELECT * FROM products WHERE category_id = 4";
+        return $this->db->getAll($sql);
+    }
+    public function getTotalProducts()
+    {
+        $sql = "SELECT COUNT(*) as total FROM products";
+        $result = $this->db->getOne($sql);
+        return $result['total'] ?? 0;
+    }
     public function getOneProduct(Product $product)
     {
         $sql = "SELECT * FROM products WHERE id = ?";
@@ -114,7 +152,7 @@ class Product
     }
     public function getRelatedProduct(Product $product)
     {
-        $sql = "SELECT * FROM products WHERE category_id = ? LIMIT 4";
-        return $this->db->getAll($sql, $product->getCategoryId());
+        $sql = "SELECT * FROM products WHERE category_id = ? AND id <> ? LIMIT 4";
+        return $this->db->getAll($sql, $product->getCategoryId(), $product->getId());
     }
 }
