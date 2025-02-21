@@ -2,6 +2,7 @@ body {
     font-family: 'Roboto', sans-serif;
     font-weight: 400;
     /* Regular */
+    padding-top: 80px; /* Để nội dung không bị che mất bởi menu */
 }
 
 h1 {
@@ -16,8 +17,32 @@ p {
     /* Medium */
 }
 
+.text-truncate {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.card-title {
+    font-weight: bolder;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 100%;
+    display: block;
+}
 
 /* header */
+.header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 999;
+    background: white;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
 .header .container.d-flex {
     flex-wrap: nowrap;
     /* Giữ các phần tử trên một hàng */

@@ -108,9 +108,13 @@ class Product
         $sql = "SELECT * FROM products";
         return $this->db->getAll($sql);
     }
-    public function getProductByCategory(Product $product, $limit, $offset)
+    public function getProductByCategory(Product $product, $limit, $offset, $order = null)
     {
-        $sql = "SELECT * FROM products WHERE category_id = ? LIMIT $limit OFFSET $offset";
+        $sql = "SELECT * FROM products WHERE category_id = ?"; 
+        if ($order) {
+            $sql .= " ORDER BY (price - (price * discount_percent)/100) $order";
+        }
+        $sql .= " LIMIT $limit OFFSET $offset";
         return $this->db->getAll($sql, $product->getCategoryId());
     }
     public function getTotalProductsByCategory(Product $product)
@@ -119,9 +123,16 @@ class Product
         $result = $this->db->getOne($sql, $product->getCategoryId());
         return $result['total'] ?? 0;
     }
-    public function paginationProduct($limit, $offset)
+    public function paginationProduct($limit, $offset, $order = null, $keyword = null)
     {
-        $sql = "SELECT * FROM products LIMIT $limit OFFSET $offset";
+        $sql = "SELECT * FROM products"; 
+        if (!empty($keyword)) {
+            $sql .= " WHERE name LIKE '%$keyword%'";
+        }
+        if ($order) {
+            $sql .= " ORDER BY (price - (price * discount_percent)/100) $order";
+        }
+        $sql .= " LIMIT $limit OFFSET $offset";
         return $this->db->getAll($sql);
     }
     public function getHotProduct()
@@ -139,9 +150,12 @@ class Product
         $sql = "SELECT * FROM products WHERE category_id = 4";
         return $this->db->getAll($sql);
     }
-    public function getTotalProducts()
+    public function getTotalProducts($keyword = null)
     {
         $sql = "SELECT COUNT(*) as total FROM products";
+        if (!empty($keyword)) {
+            $sql .= " WHERE name LIKE '%$keyword%'";
+        }
         $result = $this->db->getOne($sql);
         return $result['total'] ?? 0;
     }

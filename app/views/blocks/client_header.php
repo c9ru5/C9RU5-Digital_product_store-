@@ -6,11 +6,11 @@
 
             <div class="box1">
                 <div class="search-box1">
-                    <form>
-                        <input type="text" placeholder="Nhập từ khóa...">
-                        <label for class="icon1"><i
+                    <form method="GET" action="<?= _WEB_ROOT ?>/cua-hang">
+                        <input type="text" name="search" placeholder="Nhập từ khóa..." value="<?= isset($_GET['search']) ? $_GET['search'] : '' ?>">
+                        <button type="submit" for class="icon1" style="border: none;"><i
                                 style=" color: white; -webkit-text-stroke: 1px white;"
-                                class="bi bi-search"></i></label>
+                                class="bi bi-search"></i></button>
                     </form>
                 </div>
             </div>
@@ -154,7 +154,11 @@
 
 <script>
     function checkLogin() {
-        alert("Vui lòng đăng nhập!");
+        notification({
+            title: "Thông báo",
+            mess: "Vui lòng đăng nhập",
+            type: "warning"
+        });
         return false; // Ngăn không cho chuyển trang
     }
 
