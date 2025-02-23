@@ -77,7 +77,21 @@ class Model {
         $stmt = $this->query($sql, $param);
         return $stmt->fetchColumn(); // Lấy giá trị của cột đầu tiên
     }
-    
+
+    public function beginTransaction()
+    {
+        return $this->pdo->beginTransaction();
+    }
+
+    public function commit()
+    {
+        return $this->pdo->commit();
+    }
+
+    public function rollBack()
+    {
+        return $this->pdo->rollBack();
+    }
     
 
     public function __destruct()

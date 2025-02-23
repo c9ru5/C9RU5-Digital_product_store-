@@ -22,7 +22,6 @@
     $this->render('blocks/client_footer');
     ?>
     
-    
     <script src="<?= _WEB_ROOT ?>/app/notification/notification.js"></script>
 </body>
 

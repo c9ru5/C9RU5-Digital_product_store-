@@ -20,16 +20,28 @@ class User extends Controller
         $this->user_model->setPassword($_POST['password-lg']);
         $user = $this->user_model->login($this->user_model);
 
+
         if ($user) {
+            if ($user['status'] == 0) {
+                echo json_encode(["result" => false, "title" => "Thất bại", "mess" => "Tài khoản đã bị khóa", "type" => "error"]);
+                exit;
+            }
             $_SESSION['user'] = $user;
             $_SESSION['noti'] = [
                 'title' => 'Thành công',
                 'mess'  => 'Đăng nhập thành công',
                 'type'  => 'success'
             ];
-            echo json_encode(["result" => true]);
+            if ($user['role'] == 2) {
+                echo json_encode(["result" => true, "redirect" => _WEB_ROOT . '/trang-chu']);
+                exit;
+            } else {
+                echo json_encode(["result" => true, "redirect" => _WEB_ROOT . '/admin/thong-ke']);
+                exit;
+            }
         } else {
             echo json_encode(["result" => false, "title" => "Thất bại", "mess" => "Email hoặc mật khẩu không đúng", "type" => "error"]);
+            exit;
         }
         exit();
     }
@@ -38,18 +50,24 @@ class User extends Controller
     public function logout()
     {
         unset($_SESSION['user']);
-        session_destroy();
+        $_SESSION['noti'] = [
+            'title' => 'Thành công',
+            'mess'  => 'Đăng xuất thành công',
+            'type'  => 'success'
+        ];
         header("Location: " . _WEB_ROOT . "/");
         exit();
     }
 
     public function register()
-    {
+    {   
+        $this->user_model->setName($_POST['name-rg']);
+        $this->user_model->setRole(2);
         $this->user_model->setEmail($_POST['email-rg']);
         $this->user_model->setPassword($_POST['password-rg']);
         if ($this->user_model->checkEmail($this->user_model)) {
             echo json_encode(["result" => false, "title" => "Thất bại", "mess" => "Email đã tồn tại", "type" => "error"]);
-        } elseif($this->user_model->checkPassword($this->user_model) == false) {
+        } elseif ($this->user_model->checkPassword($this->user_model) == false) {
             echo json_encode(["result" => false, "title" => "Thất bại", "mess" => "Mật khẩu phải có ít nhất 6 ký tự và chứa ít nhất một chữ hoa, chữ thường, số và ký tự đặc biệt", "type" => "error"]);
         } elseif ($_POST['password-rg'] != $_POST['confirm-rg']) {
             echo json_encode(["result" => false, "title" => "Thất bại", "mess" => "Mật khẩu không khớp", "type" => "error"]);

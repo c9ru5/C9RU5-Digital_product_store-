@@ -62,11 +62,22 @@
                         </li>
 
                         <?php if (isset($_SESSION['user'])): ?>
-                            <li class="nav-item">
-                                <a class="nav-link" href="<?= _WEB_ROOT ?>/dang-xuat"><i
-                                        style="font-size: 25px;"
-                                        class="bi bi-person-circle"></i></a>
-                            </li>
+                            <?php if (!empty($_SESSION['user']['image'])): ?>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="<?= _WEB_ROOT ?>/dang-xuat"><img
+                                            src="<?= _WEB_ROOT ?>/public/assets/images/<?= $_SESSION['user']['image'] ?>"
+                                            class="user-image rounded-circle"
+                                            alt="User Image"
+                                            style="width: 40px;"/></a>
+                                </li>
+                            <?php else: ?>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="<?= _WEB_ROOT ?>/dang-xuat"><i
+                                            style="font-size: 30px;"
+                                            class="bi bi-person-circle"></i></a>
+                                </li>
+                            <?php endif; ?>
+
                         <?php else: ?>
                             <button id="open-login-modal" type="button" class="btn btn-success">Đăng nhập</button>
                         <?php endif; ?>
@@ -94,14 +105,12 @@
             <h1>Đăng nhập</h1>
             <div class="input-box">
                 <input type="email" id="email-lg" name="email-lg" placeholder="Email" required>
-                <i class="fa-solid fa-user"></i>
-                <small></small>
+                <i class="fa-solid fa-envelope"></i>
             </div>
 
             <div class="input-box">
                 <input type="password" id="password-lg" name="password-lg" placeholder="Mật khẩu" required>
                 <i class="fa-solid fa-lock"></i>
-                <small></small>
             </div>
 
             <div class="remember-forgot">
@@ -123,25 +132,27 @@
 <!-- register modal -->
 <div class="login-content" id="register-modal">
     <div class="wrapper">
-        <form>
+        <form class="regist-content">
             <span class="close-btn">&times;</span>
             <h1>Đăng ký</h1>
             <div class="input-box">
-                <input type="email" id="email-rg" name="email-rg" placeholder="Email" required>
+                <input type="text" id="name-rg" name="name-rg" placeholder="Tên người dùng" required>
                 <i class="fa-solid fa-user"></i>
-                <small></small>
+            </div>
+
+            <div class="input-box">
+                <input type="email" id="email-rg" name="email-rg" placeholder="Email" required>
+                <i class="fa-solid fa-envelope"></i>
             </div>
 
             <div class="input-box">
                 <input type="password" id="password-rg" name="password-rg" placeholder="Mật khẩu" required>
                 <i class="fa-solid fa-lock"></i>
-                <small></small>
             </div>
 
             <div class="input-box">
                 <input type="password" id="confirm-rg" name="confirm-rg" placeholder="Xác nhận mật khẩu" required>
                 <i class="fa-solid fa-lock"></i>
-                <small></small>
             </div>
 
             <button type="submit" class="login-btn">Đăng ký</button>
@@ -155,7 +166,7 @@
 <script>
     function checkLogin() {
         notification({
-            title: "Thông báo",
+            title: "Lưu ý",
             mess: "Vui lòng đăng nhập",
             type: "warning"
         });
@@ -214,7 +225,7 @@
                 .then(response => response.json())
                 .then(data => {
                     if (data.result == true) {
-                        window.location.reload(); // Đăng nhập thành công => Load lại trang
+                        window.location.replace(data.redirect) // Đăng nhập thành công => Load lại trang
                     } else {
                         console.log("Đăng nhập thất bại!");
                         notification({

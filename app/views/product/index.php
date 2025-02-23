@@ -53,8 +53,8 @@
             <div class="row ">
               <div class="m-5 text-center">
                 <h3>Không tìm thấy sản phẩm nào!</h3>
-                    <img loading="lazy" src="https://cdn.divineshop.vn/static/4e0db8ffb1e9cac7c7bc91d497753a2c.svg"
-                      class="Ea" alt="Giỏ hàng trống">
+                <img loading="lazy" src="https://cdn.divineshop.vn/static/4e0db8ffb1e9cac7c7bc91d497753a2c.svg"
+                  class="Ea" alt="Giỏ hàng trống">
               </div>
             </div>
           <?php else: ?>
@@ -95,7 +95,6 @@
                 </ul>
               </nav>
             <?php endif; ?>
-
           </div>
         </div>
       </div>

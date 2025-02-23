@@ -132,7 +132,7 @@
 <script>
     function checkLogin() {
         notification({
-            title: "Chú ý",
+            title: "Lưu ý",
             mess: "Vui lòng đăng nhập",
             type: "warning",
         });

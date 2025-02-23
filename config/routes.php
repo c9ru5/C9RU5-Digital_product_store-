@@ -12,3 +12,13 @@ $routes['gio-hang'] = 'cart/index';
 $routes['thong-tin-ca-nhan'] = 'user/profile';
 $routes['cua-hang'] = 'product/index';
 $routes['cua-hang/(\d+)'] = 'product/productByCategory/$1';
+
+
+$routes['admin/thong-ke'] = 'admin/dashboard/index';
+$routes['admin/quan-ly-danh-muc'] = 'admin/category/index';
+$routes['admin/quan-ly-san-pham'] = 'admin/product/index';
+$routes['admin/quan-ly-nhan-vien'] = 'admin/user/staff';
+$routes['admin/quan-ly-khach-hang'] = 'admin/user/client';
+$routes['admin/quan-ly-don-hang-dang-xu-ly'] = 'admin/order/processing';
+$routes['admin/quan-ly-don-hang-thanh-cong'] = 'admin/order/success';
+$routes['admin/quan-ly-don-hang-da-huy'] = 'admin/order/cancel';

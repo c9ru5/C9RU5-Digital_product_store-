@@ -27,25 +27,21 @@ class App {
             $url = strtok($url, '?');
             
             // Lấy thư mục gốc chuẩn hóa
-            $scriptName = realpath(dirname($_SERVER['SCRIPT_NAME']));
+            $scriptName = dirname($_SERVER['SCRIPT_NAME']);
+            $scriptName = str_replace('\\', '/', $scriptName); // Chuẩn hóa đường dẫn
             $url = str_replace($scriptName, '', $url);  // Loại bỏ thư mục gốc chuẩn hóa
             
             // Tách đường dẫn thành mảng và xử lý
             $urlParts = explode('/', trim($url, '/'));
             
-            // Loại bỏ thư mục đầu tiên nếu cần
-            array_shift($urlParts);
-            
             // Nối lại các phần còn lại thành URL mới
             $url = '/' . implode('/', $urlParts);
-    
         } else {
             $url = '/';
         }
         return $url;
     }
-    
-    
+
     public function handleUrl() {
         $url = $this->getUrl();
         $url = $this->__routes->handleRoute($url);
@@ -64,7 +60,10 @@ class App {
                 if (!empty($urlArr[$key - 1])) {
                     unset($urlArr[$key - 1]);
                 }
-                if (file_exists(_DIR_ROOT . '/app/controllers/' . $fileCheck . '.php')) {
+
+                // Kiểm tra xem file controller có tồn tại không
+                $controllerPath = _DIR_ROOT . '/app/controllers/' . $fileCheck . '.php';
+                if (file_exists($controllerPath)) {
                     $urlCheck = $fileCheck;
                     break;
                 }
@@ -84,23 +83,29 @@ class App {
             $urlCheck = $this->__controller;
         }
 
+        // Xây dựng đường dẫn đầy đủ đến file controller
         $controllerPath = _DIR_ROOT . '/app/controllers/' . $urlCheck . '.php';
         if (file_exists($controllerPath)) {
             require_once $controllerPath;
 
+            // Xây dựng namespace đầy đủ cho controller
+            $namespace = 'App\\Controllers\\';
+            if (str_contains($urlCheck, '/')) {
+                // Nếu controller nằm trong thư mục con (ví dụ: admin/Dashboard)
+                $namespace .= str_replace('/', '\\', dirname($urlCheck)) . '\\';
+            }
+            $controllerClass = $namespace . $this->__controller;
+
             // Kiểm tra class controller có tồn tại không
-            $controllerClass = 'App\\Controllers\\' . $this->__controller;
             if (class_exists($controllerClass)) {
                 $this->__controller = new $controllerClass;
                 unset($urlArr[0]);
             } else {
-                echo 'Controller không tồn tại' . $controllerClass;
-                $this->loadError();
+                $this->loadError("Controller không tồn tại: $controllerClass");
                 return;
             }
         } else {
-            echo 'File controller không tồn tại' . $controllerPath;
-            $this->loadError();
+            $this->loadError("File controller không tồn tại: $controllerPath");
             return;
         }
 
@@ -117,12 +122,13 @@ class App {
         if (method_exists($this->__controller, $this->__action)) {
             call_user_func_array([$this->__controller, $this->__action], $this->__params);
         } else {
-            echo 'Action không tồn tại' . $this->__action;
-            $this->loadError();
+            $this->loadError("Action không tồn tại: " . $this->__action);
         }
     }
 
-    public function loadError($name = '404') {
+    public function loadError($message = '404', $name = '404') {
+        // Hiển thị thông báo lỗi chi tiết
+        echo "<pre>Lỗi: $message</pre>";
         require_once _DIR_ROOT . '/app/errors/' . $name . '.php';
     }
 }
