@@ -24,10 +24,13 @@ class Category extends Controller
 
         $categories = $this->category_model->paginationCategory($limit, $offset);
 
+
+
         $total_categories = $this->category_model->getTotalCategory();
         $total_pages = ceil($total_categories / $limit);
 
         $this->data['page_title'] = 'Quản lý danh mục';
+        $this->data['sub_content']['total'] = $total_categories;
         $this->data['sub_content']['categories'] = $categories;
         $this->data['sub_content']['total_pages'] = $total_pages;
         $this->data['sub_content']['current_page'] = $page;

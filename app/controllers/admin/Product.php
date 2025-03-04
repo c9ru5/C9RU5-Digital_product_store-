@@ -31,6 +31,7 @@ class Product extends Controller
 
         $this->data['page_title'] = 'Quản lý sản phẩm';
         $this->data['sub_content']['products'] = $products;
+        $this->data['sub_content']['total'] = $total_products;
         $this->data['sub_content']['categories'] = $this->category_model->getAllCategory();
         $this->data['sub_content']['total_pages'] = $total_pages;
         $this->data['sub_content']['current_page'] = $page;

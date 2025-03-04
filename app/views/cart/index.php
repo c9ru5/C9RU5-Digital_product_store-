@@ -75,6 +75,7 @@
                     foreach ($cart as $detail) {
                         $total_price += ($detail['price'] - ($detail['price'] * $detail['discount_percent']) / 100) * $detail['cart_quantity'];
                     }
+                    $_SESSION['value'] = $total_price;
                     ?>
                 </div>
                 <div class="col-4 p-5">
@@ -100,8 +101,8 @@
                         <button type="button" class="btn btn-success mt-3" style="width: 100%;"><i
                                 class="bi bi-credit-card-fill"></i> Mua ngay</button>
                     <?php else: ?>
-                        <button type="button" class="btn btn-success mt-3" style="width: 100%;"><i
-                                class="bi bi-credit-card-fill"></i> Nạp thêm vào tài khoản</button>
+                        <a href="<?= _WEB_ROOT ?>/thanh-toan" type="button" class="btn btn-success mt-3" style="width: 100%;"><i
+                                class="bi bi-credit-card-fill"></i> Nạp thêm vào tài khoản</a>
                     <?php endif; ?>
 
                     <p class="text-center mt-3" style="color: gray;">Quét mã thanh toán không cần nạp tiền</p>

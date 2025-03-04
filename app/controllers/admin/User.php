@@ -30,6 +30,7 @@ class User extends Controller
 
         $this->data['page_title'] = 'Quản lý nhân viên';
         $this->data['sub_content']['users'] = $users;
+        $this->data['sub_content']['total'] = $total_users;
         $this->data['sub_content']['total_pages'] = $total_pages;
         $this->data['sub_content']['current_page'] = $page;
         $this->data['content'] = 'admin/user/staff';
@@ -50,6 +51,7 @@ class User extends Controller
 
         $this->data['page_title'] = 'Quản lý khách hàng';
         $this->data['sub_content']['users'] = $users;
+        $this->data['sub_content']['total'] = $total_users;
         $this->data['sub_content']['total_pages'] = $total_pages;
         $this->data['sub_content']['current_page'] = $page;
         $this->data['content'] = 'admin/user/client';

@@ -27,6 +27,7 @@ class Order extends Controller {
 
         $this->data['page_title'] = 'Quản lý đơn hàng đang xử lý';
         $this->data['sub_content']['orders'] = $orders;
+        $this->data['sub_content']['total'] = $total_orders;
         $this->data['sub_content']['total_pages'] = $total_pages;
         $this->data['sub_content']['current_page'] = $page;
         $this->data['sub_content']['users'] = $this->user_model->getAllUser();
@@ -48,6 +49,7 @@ class Order extends Controller {
 
         $this->data['page_title'] = 'Quản lý đơn hàng thành công';
         $this->data['sub_content']['orders'] = $orders;
+        $this->data['sub_content']['total'] = $total_orders;
         $this->data['sub_content']['total_pages'] = $total_pages;
         $this->data['sub_content']['current_page'] = $page;
         $this->data['sub_content']['users'] = $this->user_model->getAllUser();
@@ -69,6 +71,7 @@ class Order extends Controller {
 
         $this->data['page_title'] = 'Quản lý đơn hàng đã hủy';
         $this->data['sub_content']['orders'] = $orders;
+        $this->data['sub_content']['total'] = $total_orders;
         $this->data['sub_content']['total_pages'] = $total_pages;
         $this->data['sub_content']['current_page'] = $page;
         $this->data['sub_content']['users'] = $this->user_model->getAllUser();

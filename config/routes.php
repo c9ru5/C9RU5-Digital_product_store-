@@ -9,6 +9,7 @@ $routes['dang-nhap'] = 'user/login';
 $routes['dang-ky'] = 'user/register';
 $routes['dang-xuat'] = 'user/logout';
 $routes['gio-hang'] = 'cart/index';
+$routes['thanh-toan'] = 'order/index';
 $routes['thong-tin-ca-nhan'] = 'user/profile';
 $routes['cua-hang'] = 'product/index';
 $routes['cua-hang/(\d+)'] = 'product/productByCategory/$1';

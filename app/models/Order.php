@@ -10,6 +10,7 @@ class Order
     private $status;
     private $user_id;
     private $date_created;
+    private $value;
     private $detail_id;
     private $product_id;
     private $detail_quantity;
@@ -74,6 +75,14 @@ class Order
     public function getDate()
     {
         return $this->date_created;
+    }
+    public function setValue($value)
+    {
+        return $this->value = $value;
+    }
+    public function getValue()
+    {
+        return $this->value;
     }
 
     public function paginationOrder($limit, $offset, $status)
@@ -188,5 +197,26 @@ class Order
             'labels' => $labels,
             'values' => $values
         ];
+    }
+
+    public function getDetailOrderByUser(Order $order)
+    {
+        $sql = "SELECT d.*";
+        $sql .= " FROM orders o JOIN detail_orders d";
+        $sql .= " ON o.id = d.order_id";
+        $sql .= " WHERE o.user_id = ?";
+        return $this->db->getAll($sql, $order->getUserId());
+    }
+
+    public function addOrder(Order $order)
+    {
+        $sql = "INSERT INTO orders(user_id, value) VALUES (?, ?)";
+        return $this->db->insert($sql, $order->getUserId(), $order->getValue());
+    }
+
+    public function addOrderDetail(Order $order)
+    {
+        $sql = "INSERT INTO detail_orders(order_id, product_id, quantity) VALUES (?, ?, ?)";
+        return $this->db->insert($sql, $order->getId(), $order->getProductId(), $order->getDetailQuantity());
     }
 }
